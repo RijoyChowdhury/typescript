@@ -41,9 +41,18 @@ class Car extends Vehicle {
   }
 }
 
-class RaceCar extends Car {
+interface Usable {
+  hasSeats: number;
+  openBunk(): string;
+}
+
+class RaceCar extends Car implements Usable {
   constructor(public wheels: number, color: string) {
     super(color, 'v12');
+  }
+  hasSeats = 4;
+  openBunk() {
+    return 'bunk door opened';
   }
 }
 
@@ -66,3 +75,10 @@ console.log('Race Car Data:');
 console.log(racingCar.color);
 console.log(racingCar.wheels);
 racingCar.getEngine;
+
+function checkCar(car: Usable): void {
+  console.log(`Car has ${car.hasSeats} seats`);
+  console.log(car.openBunk());
+}
+
+checkCar(racingCar);
